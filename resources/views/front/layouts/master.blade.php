@@ -1,0 +1,5 @@
+@include('front.layouts.head')
+@include('front.layouts.upper-bar')
+@include('front.layouts.nav-bar')
+@yield('content')
+@include('front.layouts.footer')
