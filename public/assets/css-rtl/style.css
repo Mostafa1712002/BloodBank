@@ -14673,8 +14673,7 @@ a.close.disabled {
 /* ###### 6.3 Global  ###### */
 
 body {
-  font-family: 'Cairo', sans-serif;
-
+    font-family: 'Cairo', sans-serif;
 }
 
 .main-body,
