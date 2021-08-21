@@ -48,7 +48,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $record = Category::find($id);
-        if (!$record) {return view("message.404");}
+        if (!$record) {return abort(404);}
         return view("category.edit", compact("record"));
     }
 
@@ -56,7 +56,7 @@ class CategoryController extends Controller
     {
         //  The start of validation
         $record = Category::find($id);
-        if (!$record) {return view("message.404");}
+        if (!$record) {return abort(404);}
         $messages = [
             "name.max" => " الحد الاقصي من الحروف هو 50 ",
             "name.unique" => "هدا الاسم مأخوذ من قبل",
@@ -81,7 +81,7 @@ class CategoryController extends Controller
     {
         //  first confirm for id is exists and then send a response json for ajax for make a delete
         $record = Category::find($id);
-        if (!$record) {return view("message.404");}
+        if (!$record) {return abort(404);}
         if ($record) {
             $record->delete();
             return response()->json([
