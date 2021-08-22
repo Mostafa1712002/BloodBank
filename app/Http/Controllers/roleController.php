@@ -57,7 +57,7 @@ class RoleController extends Controller
         $permissions = Permission::orderBy("group")->get();
 
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
 
         return view("role.edit", compact("record", "permissions"));
@@ -67,7 +67,7 @@ class RoleController extends Controller
     {
         //  Validation to sure it valid id and then validation of the rules
         $role = Role::find($id);
-        if (!$role) : return view("message.404");
+        if (!$role) : return abort("404");
         endif;
         $rules = ["name" => "nullable|unique:roles,name," . $role->id, "display_name" => "nullable"];
         $message = ["name.unique" => " رتبه موجوده من قبل"];
@@ -88,7 +88,7 @@ class RoleController extends Controller
     {
         $record = Role::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         if ($record) {
             $record->delete();

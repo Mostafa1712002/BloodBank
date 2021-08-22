@@ -6,7 +6,7 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class clientController extends Controller
+class ClientController extends Controller
 {
     // use Flash;
     /**
@@ -58,17 +58,13 @@ class clientController extends Controller
     }
 
 
-    public function show($id)
-    {
 
-      
-    }
 
     // Delete && destroy client
     public function destroy($id)
     {
         $record = Client::find($id);
-        if(!$record){ return abort(404); }
+        if(!$record){ return abort("404"); }
         if ($record) {
             $record->delete();
             return response()->json([
@@ -85,7 +81,7 @@ class clientController extends Controller
     public function active($id)
     {
         $record = Client::find($id);
-        if(!$record){ return abort(404); }
+        if(!$record){ return abort("404"); }
 
         $record->update(["is_active" => 1]);
         return redirect()->back();
@@ -101,7 +97,7 @@ class clientController extends Controller
     {
 
         $record = Client::find($id);
-        if(!$record){ return abort(404); }
+        if(!$record){ return abort("404"); }
         $record->update(["is_active" => 0]);
         return redirect()->back();
 

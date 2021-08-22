@@ -65,7 +65,7 @@ class PostController extends Controller
     {
         $record = Post::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         $categories = Category::pluck("name", "id");
         return view("post.edit")->with(["record" => $record, "categories" => $categories]);
@@ -85,7 +85,7 @@ class PostController extends Controller
 
 
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         $validator = Validator::make($request->all(), $rules, $this->getMessage());
         if ($validator->fails()) :
@@ -117,7 +117,7 @@ class PostController extends Controller
     {
         $record = Post::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         if ($record) {
             $record->delete();

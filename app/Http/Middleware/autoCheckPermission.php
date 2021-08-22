@@ -25,7 +25,7 @@ class AutoCheckPermission
         if ($permission) {
             if (!request()->user()->can($permission->name)) {
 
-                return abort("500");
+                return abort("403");
             }
         }
         //  else {

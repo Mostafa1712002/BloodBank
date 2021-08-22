@@ -47,7 +47,7 @@ class CityController extends Controller
 
         $record = City::find($id);
         if (!$record) {
-            return abort(404);
+            return abort("404");
         }
         $governorates = Governorate::pluck("name", "id");
         return view("city.edit")->with(["record" => $record, "governorates" => $governorates]);
@@ -58,7 +58,7 @@ class CityController extends Controller
         //  The start of validation
         $record = City::find($id);
         if (!$record) {
-            return abort(404);
+            return abort("404");
         }
 
 
@@ -87,7 +87,7 @@ class CityController extends Controller
                 "status" => 1,
             ]);
         } else {
-            return abort(404);
+            return abort("404");
         }
     }
 

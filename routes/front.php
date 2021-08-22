@@ -27,12 +27,15 @@ Route::group(["prefix" => "front"], function () {
     Route::get('/about-blood-bank', [MainController::class, "aboutBloodBank"])->name('about-blood-bank');
     Route::get('/inside-post/{id?}', [MainController::class, "insidePost"])->name('client-inside-post');
     Route::get('/article-details', [MainController::class, "articleDetails"])->name('article-details');
+    Route::resource('client-donation-request', DonationRequest::class);
+
 
     // Login and Register
     Route::get('/sign-in-account', [AuthController::class, "signInAccount"])->name('sign-in-account');
     Route::get('/sign-in-check', [AuthController::class, "signInCheck"])->name('sign-in-check');
     Route::get('/register-save', [AuthController::class, "registerSave"])->name('client.register-save');
     Route::get('/create-account', [AuthController::class, "createAccount"])->name('create-account');
+
 
     // Reset Password
     Route::prefix('client')->group(function () {
@@ -46,7 +49,6 @@ Route::group(["prefix" => "front"], function () {
     ############################### Routes if the client register and sign in ######################
     Route::middleware('auth:front')->group(function () {
         // Log out
-        Route::resource('client-donation-request', DonationRequest::class);
 
         Route::post('/client/logout', [AuthController::class, "logout"])->name('client-logout');
         Route::post("/toggle-favourite", [MainController::class, "postFavorite"])->name("client-toggle-favourite");

@@ -7,6 +7,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+
 class RedirectIfAuthenticated
 {
     /**
@@ -23,12 +25,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-
-                if (auth("front")->user() || auth("web")->user()) :
-                    return redirect("/front/handle-login");
-                    else :
-                        return redirect(RouteServiceProvider::HOME);
-                endif;
+                return redirect(RouteServiceProvider::HOME);
             }
         }
 

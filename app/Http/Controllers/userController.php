@@ -72,7 +72,7 @@ class UserController extends Controller
         $record = User::find($id);
         /* Validation */
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         $rules = [
             "name" => "required",
@@ -106,7 +106,7 @@ class UserController extends Controller
     {
         $record = User::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         if ($record) {
             $record->delete();
@@ -121,7 +121,7 @@ class UserController extends Controller
     {
         $record = User::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         return view("user.editPassword", compact("record"));
     }
@@ -132,7 +132,7 @@ class UserController extends Controller
 
         $record = User::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         $rules = ["password" => "required|confirmed|min:8"];
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class governorateController extends Controller
+class GovernorateController extends Controller
 {
 
     public function index()
@@ -44,7 +44,7 @@ class governorateController extends Controller
     {
         $record = Governorate::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         return view("governorate.edit", compact("record"));
     }
@@ -55,7 +55,7 @@ class governorateController extends Controller
         /* Validation */
         $record = Governorate::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         $validator = Validator::make($request->all(), ["name" => "required|max:50|unique:governorates,name," . $record->id], $this->getMessage());
         if ($validator->fails()) {
@@ -74,7 +74,7 @@ class governorateController extends Controller
     {
         $record = Governorate::find($id);
         if (!$record) {
-            return view("message.404");
+            return abort("404");
         }
         if ($record) {
             $record->delete();
@@ -82,7 +82,7 @@ class governorateController extends Controller
                 "status" => 1,
             ]);
         } else {
-            return view("message.404");
+            return abort("404");
         }
     }
 

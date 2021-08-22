@@ -44,7 +44,7 @@ class ContactController extends Controller
                 "status" => 1,
             ]);
         } else {
-            return view("message.404");
+            return abort("404");
         }
     }
 

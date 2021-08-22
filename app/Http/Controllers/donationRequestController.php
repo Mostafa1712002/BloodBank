@@ -95,7 +95,7 @@ class DonationRequestController extends Controller
     public function destroy($id)
     {
         $record = DonationRequest::find($id);
-        if (!$record) {return view("message.404");}
+        if (!$record) {return abort("404");}
         if ($record) {
             $record->delete();
             return response()->json([
