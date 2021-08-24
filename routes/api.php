@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(["prefix" => "v1", "namespace" => "api"], function () {
+Route::group(["prefix" => "v1", "namespace" => "Api"], function () {
     Route::get('/post', [MainController::class, "post"])->middleware("auth:api");
     Route::get('/posts', [MainController::class, "posts"]);
     Route::get('/governorates', [MainController::class, "governorates"]);
