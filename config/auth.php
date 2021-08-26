@@ -53,6 +53,7 @@ return [
             'provider' => 'clients',
             'hash' => false,
         ],
+        
     ],
 
     /*

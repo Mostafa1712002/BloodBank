@@ -41,6 +41,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{  }}
                         @foreach ($records as $record)
                         <tr data-row="#form{{ $record->id }}" id="form{{ $record->id }}">
                             <td scope="row" class="text-center">{{ $loop->iteration	 }}</td>

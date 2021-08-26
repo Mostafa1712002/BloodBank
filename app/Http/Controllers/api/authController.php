@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Client;
-use App\Models\Contact;
-use App\Models\Notification;
-use App\Models\Post;
-use App\Models\Setting;
 use App\Models\Token;
+use App\Models\Client;
 use App\Traits\ApiTraits;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -32,7 +29,7 @@ class AuthController extends Controller
             "city_id" => "required|max:30|exists:cities,id",
             "governorate_id" => ["required", "exists:governorates,id", "integer"],
             "blood_type_id" => "required|max:12|exists:blood_types,id",
-            "password" => "required|confirmed",
+            "password" => "required|confirmed|max:8",
         ]);
 
         if ($validator->fails()) {
@@ -48,15 +45,23 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        $validator = validator()->make($request->all(), [ // Note here we use validator()->make(,[]) not $this->validate() in API
+        $validator = validator()->make($request->all(), [ 
             "phone" => "required|max:15",
             "password" => "required",
         ]);
         if ($validator->fails()) {
             return $this->responseJson(0, "لا يوجد حساب مطابق");
         }
+
+        //  Guard front here for  search in eloquent Client
+        $auth = Auth::guard("front")->attempt(['phone' => $request->phone, 'password' => $request->password]);
+
+        if (!$auth) {
+            return $this->responseJson("0", "راجع بياناتك هناك خطأ");
+        }
+
         $client = Client::where("phone", $request->phone)->first();
-        auth("api")->validate($request->all()); // take the password hashing and make matching between it and the the password and phone you enter .
+        auth("api")->validate($request->all()); 
         return $this->responseJson(1, "تم التسجيل بنجاح", [
             "api_token" => $client->api_token,
             "data" => $client,

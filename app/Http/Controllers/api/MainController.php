@@ -238,15 +238,39 @@ class MainController extends Controller
             "governorate_id" => ["nullable", "exists:governorates,id", "integer"],
             "city_id" => ["nullable", "exists:cities,id", "integer"],
             "phone" => "nullable|unique:clients,phone," . $request->user()->id,
-            "password" => "required|confirmed",
+            "password" => "nullable|confirmed|max:8",
         ]);
-
         if ($validator->fails()) :
             return $this->responseJson("0", $validator->errors()->first(), $validator->errors());
         endif;
-
         $user = $request->user();
-        $user->update($request->all());
+
+        if ($request->password) {
+            $user->update(["password" => $request->password]);
+        }
+        if ($request->name) {
+            $user->update(["name" => $request->name]);
+        }
+        if ($request->email) {
+            $user->update(["email" => $request->email]);
+        }
+        if ($request->last_donation_date) {
+            $user->update(["last_donation_date" => $request->last_donation_date]);
+        }
+        if ($request->d_o_b) {
+            $user->update(["d_o_b" => $request->d_o_b]);
+        }
+        if ($request->governorate_id) {
+            $user->update(["governorate_id" => $request->governorate_id]);
+        }
+        if ($request->city_id) {
+            $user->update(["city_id" => $request->city_id]);
+        }
+
+
+
+
+
         return $this->responseJson("1", "تم تعديل البيانات بنجاح", $user);
     }
 }
