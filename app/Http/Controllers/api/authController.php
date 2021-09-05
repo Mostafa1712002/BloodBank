@@ -25,11 +25,9 @@ class AuthController extends Controller
             "email" => "required|email|unique:clients,email",
             "phone" => "required|max:17|unique:clients,phone",
             "d_o_b" => "required|date",
-            "pin_code" => "nullable|max:10",
             "city_id" => "required|max:30|exists:cities,id",
-            "governorate_id" => ["required", "exists:governorates,id", "integer"],
             "blood_type_id" => "required|max:12|exists:blood_types,id",
-            "password" => "required|confirmed|max:8",
+            "password" => "required|confirmed|min:8",
         ]);
 
         if ($validator->fails()) {
@@ -45,12 +43,12 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        $validator = validator()->make($request->all(), [ 
+        $validator = validator()->make($request->all(), [
             "phone" => "required|max:15",
-            "password" => "required",
+            "password" => "required|min:8",
         ]);
         if ($validator->fails()) {
-            return $this->responseJson(0, "لا يوجد حساب مطابق");
+            return $this->responseJson((string)0, $validator->errors()->first(), $validator->errors());
         }
 
         //  Guard front here for  search in eloquent Client
@@ -61,7 +59,6 @@ class AuthController extends Controller
         }
 
         $client = Client::where("phone", $request->phone)->first();
-        auth("api")->validate($request->all()); 
         return $this->responseJson(1, "تم التسجيل بنجاح", [
             "api_token" => $client->api_token,
             "data" => $client,
@@ -74,7 +71,7 @@ class AuthController extends Controller
     public function resetPassword(Request $request)
     {
         $validator = validator()->make($request->all(), [
-            "phone" => "required",
+            "phone" => "required|exists:clients,phone",
         ]);
 
         if ($validator->fails()) {
@@ -132,7 +129,6 @@ class AuthController extends Controller
     {
         $rules = [
             "platform" => ["required", "in:android,ios"],
-            "client_id" => ["required", "exists:clients,id"],
             "token" => ["required"],
         ];
 

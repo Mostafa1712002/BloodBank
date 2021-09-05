@@ -91,6 +91,7 @@ class MainController extends Controller
         return $this->responseJson(1, "success", $notification);
     }
 
+    
 
     // to get  The list of favorite for this specifics client
     public function myFavorite(Request $request)
@@ -100,7 +101,6 @@ class MainController extends Controller
     }
 
 
-    #######################       Methods Posts ###########################
 
 
     //  The method to create a donation request

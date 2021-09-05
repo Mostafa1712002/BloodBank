@@ -15,9 +15,9 @@ class bloodBank_resetPassword extends Mailable
      *
      * @return void
      */
-    public function __construct($client)
+    public function __construct($record)
     {
-        $this->client = $client;
+        $this->record = $record;
     }
 
     /**
@@ -27,6 +27,6 @@ class bloodBank_resetPassword extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.resetPassword',["client"=>$this->client]);
+        return $this->markdown('emails.resetPassword',["client"=>$this->record]);
     }
 }

@@ -40,7 +40,7 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), $rules, $this->getMessage());
         if ($validator->fails()) :
             Flash($validator->errors()->first())->error();
-            return redirect()->back()->withInput(["title", "content", "image", "category_id"]);
+            return redirect()->back();
         endif;
         /* /Validation  */
 
