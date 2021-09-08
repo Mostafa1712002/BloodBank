@@ -112,7 +112,7 @@
                 {{ $records->links("front.paginate") }}
                 @else
                 <div class="alert alert-danger text-center">
-                    لاتوجد بيانات هنا .....😕😕😕😕😕😕😕😕😕😕😕
+                    لاتوجد بيانات هنا .....
                 </div>
                 @endif
 
@@ -126,6 +126,8 @@
 <!-- row close -->
 
 {{-- Row for fix smooth --}}
+</div>
+</div>
 
 <div class="row row-sm fix-smooth">
 </div>

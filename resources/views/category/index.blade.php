@@ -74,8 +74,9 @@
     </div>
     <!-- /.card -->
 </div>
-</div>
 <!-- row close -->
+</div>
+</div>
 
 {{-- Row for fix smooth --}}
 

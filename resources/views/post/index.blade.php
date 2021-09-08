@@ -106,8 +106,13 @@
         </div>
     </div>
     <!-- row close -->
+    </div>
+    </div>
+    </div>
+
     {{-- Row for fix smooth --}}
     <div class="fix-smooth">
+    </div>
 
     @endsection
 

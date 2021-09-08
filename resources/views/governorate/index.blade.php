@@ -83,6 +83,8 @@
         </div>
     </div>
     <!-- row close -->
+</div>
+</div>
 
     {{-- Row for fix smooth --}}
     <div class="row row-sm fix-smooth">

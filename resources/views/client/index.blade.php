@@ -210,7 +210,7 @@
                         {{ $records->links('front.paginate') }}
                     @else
                         <div class="alert alert-danger text-center">
-                            لاتوجد بيانات هنا .....😕😕😕😕😕😕😕
+                            لاتوجد بيانات هنا 
                         </div>
                     @endif
                 </div>

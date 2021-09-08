@@ -43,6 +43,8 @@
 {{-- Row for fix smooth --}}
 <div class="row row-sm fix-smooth">
 </div>
+</div>
+</div>
 <!-- Container closed -->
 @endsection
 @section('js')

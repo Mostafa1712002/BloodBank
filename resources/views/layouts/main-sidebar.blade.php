@@ -133,14 +133,13 @@
                         <span class="side-menu__label">
                             الأعدادت</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/setting')) }}">الأعدادت
+                        <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/setting-edit')) }}">الأعدادت
                                 العامه
                                 لتطبيق</a>
                         </li>
                     </ul>
                 </li>
             @endif
-
         </ul>
 </aside>
 <!-- main-sidebar -->

@@ -88,15 +88,14 @@
             <!-- /.card -->
             <!-- /.card -->
         </div>
-    </div>
-    <!-- row close -->
-    {{-- Row for fix smooth --}}
-    <div class="row row-sm fix-smooth">
-    </div>
+        <!-- row close -->
+        {{-- Row for fix smooth --}}
 
     </div>
     </div>
     <!-- Container closed -->
+    <div class="row row-sm fix-smooth">
+    </div>
 @endsection
 
 @section('js')
