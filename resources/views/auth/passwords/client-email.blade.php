@@ -3,6 +3,9 @@
 <!-- Sidemenu-respoansive-tabs css -->
 <link href="{{URL::asset('assets/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css')}}" rel="stylesheet">
 @endsection
+@section('title')
+    استعادة كلمة المرور - بنك الدم
+@endsection
 @section('content')
 <div class="container-fluid pl-0">
     <div class="row no-gutter">

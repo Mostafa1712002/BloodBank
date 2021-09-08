@@ -1,8 +1,9 @@
 @extends('layouts.master')
-
+@section('title')
+    الرسائل المستلمه - بنك الدم 
+@endsection
 @section('main-word')
 الرسائل المستلمه
-
 @endsection
 {{-- Page headerr  --}}
 @section('page-header')
@@ -128,9 +129,7 @@
 
 <div class="row row-sm fix-smooth">
 </div>
-</div>
-</div>
-<!-- Container closed -->
+
 @endsection
 
 

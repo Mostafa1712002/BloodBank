@@ -1,8 +1,10 @@
 @extends('layouts.master')
-@section('css')
-
 @section('main-word')
 الأماكن
+@endsection
+
+@section('title')
+    تعديل قسم - بنك الدم 
 @endsection
 {{-- Page headerr  --}}
 @section('page-header')
@@ -46,7 +48,5 @@
 <div class="row row-sm fix-smooth">
 </div>
 
-</div>
-</div>
-<!-- Container closed -->
+
 @endsection

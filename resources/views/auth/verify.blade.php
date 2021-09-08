@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    استعادة كلمة المرور - بنك الدم
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

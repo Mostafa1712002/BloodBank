@@ -2,6 +2,9 @@
 @section('main-word')
 الأماكن
 @endsection
+@section('title')
+    إنشاء محافظه - بنك الدم 
+@endsection
 @section("page-header")
 {{-- Page headerr  --}}
 <div class="breadcrumb-header justify-content-between">
@@ -44,7 +47,5 @@
 <div class="row row-sm fix-smooth">
 </div>
 
-</div>
-</div>
-<!-- Container closed -->
+
 @endsection

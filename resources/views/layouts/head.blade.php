@@ -1,5 +1,5 @@
 <!-- Title -->
-<title> تطبيق بنك الدم </title>
+<title>@yield("title") </title>
 <!-- Favicon -->
 <link rel="icon" class="image-fluid" href="{{URL::asset('images/app/icon.png')}}" type="image/x-icon"/>
 <!-- Icons css -->

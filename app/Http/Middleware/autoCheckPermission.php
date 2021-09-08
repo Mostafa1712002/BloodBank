@@ -19,15 +19,16 @@ class AutoCheckPermission
     {
 
 
-        $routeName = $request->route()->getName();
-        $permission = Permission::whereRaw("FIND_IN_SET('$routeName',routes)")->first();
+        // $routeName = $request->route()->getName();
 
-        if ($permission) {
-            if (!request()->user()->can($permission->name)) {
+        // $permission = Permission::whereRaw("FIND_IN_SET('$routeName',routes)")->first();
 
-                return abort("403");
-            }
-        }
+        // if ($permission) {
+        //     if (!request()->user()->can($permission->name)) {
+
+        //         return abort("403");
+        //     }
+        // }
         //  else {
         //     return redirect()->route("error.403");
         // }

@@ -2,6 +2,9 @@
 @section('main-word')
 الأعدادت
 @endsection
+@section('title')
+     تعديل كلمة المرور - بنك الدم 
+@endsection
 {{-- Page headerr  --}}
 @section('page-header')
 <div class="breadcrumb-header justify-content-between">

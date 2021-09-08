@@ -16,6 +16,9 @@
 @inject('donationRequests', 'App\Models\DonationRequest')
 @inject('governorates', 'App\Models\Governorate')
 @inject('posts', 'App\Models\Post')
+@section('title')
+    الصفحه الرئيسيه - بنك الدم
+@endsection
 @section('content')
 
 
@@ -153,7 +156,7 @@
 
 @if (auth()->user()->can("show-post"))
 <div class="row">
-    <div class="col-12 text-body text-center " style=" font-size:50px">
+    <div class="col-12 text-body text-center " >
 
         <a href="{{ route("user.index") }}" class="text-secondary">
             عن المقالات

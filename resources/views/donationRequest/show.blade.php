@@ -2,6 +2,9 @@
 @section('main-word')
 المحتويات
 @endsection
+@section('title')
+    طلبات التبرع - بنك الدم 
+@endsection
 @section("page-header")
 {{-- Page headerr  --}}
 <div class="breadcrumb-header justify-content-between">
@@ -156,11 +159,6 @@
         </div>
     </div>
     <!-- row close -->
-
-
-</div>
-</div>
-<!-- Container closed -->
 @endsection
 
 @section('js')

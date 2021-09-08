@@ -1,7 +1,7 @@
 @extends('layouts.master2')
 
 @section('title')
-تسجيل الدخول
+تسجيل الدخول - بنك الدم
 @stop
 @section('content')
 <div class="contianer">

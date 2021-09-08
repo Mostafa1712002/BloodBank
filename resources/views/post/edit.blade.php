@@ -2,6 +2,9 @@
 @section('main-word')
 المحتويات
 @endsection
+@section('title')
+    تعديل مقال - بنك الدم 
+@endsection
 @section("page-header")
 {{-- Page headerr  --}}
 <div class="breadcrumb-header justify-content-between">
@@ -74,11 +77,7 @@
 <!-- row close -->
 {{-- Row for fix smooth --}}
 <div class="row row-sm fix-smooth">
-</div>
 
-</div>
-</div>
-<!-- Container closed -->
 @endsection
 @section('js')
 <script>

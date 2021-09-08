@@ -49,7 +49,19 @@ $(function() {
 		}
 	})
 
-
+	// ______________ RATING STAR
+	var ratingOptions = {
+		selectors: {
+			starsSelector: '.rating-stars',
+			starSelector: '.rating-star',
+			starActiveClass: 'is--active',
+			starHoverClass: 'is--hover',
+			starNoHoverClass: 'is--no-hover',
+			targetFormElementSelector: '.rating-value'
+		}
+	};
+	$(".rating-stars").ratingStars(ratingOptions);
+	
 	
 	// ______________Cover Image
 	$(".cover-image").each(function() {

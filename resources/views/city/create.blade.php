@@ -1,11 +1,8 @@
 
     @extends('layouts.master')
-    @section('css')
-    <!--  Custom same page css-->
-    <link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
-    <!-- Maps css -->
-    <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
-    @endsection
+    @section('title')
+    إنشاء مدينه - بنك الدم 
+@endsection
     @section('main-word')
     الأماكن
     @endsection

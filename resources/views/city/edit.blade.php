@@ -1,5 +1,7 @@
 @extends('layouts.master')
-@section('css')
+@section('title')
+    تعديل مدينه - بنك الدم 
+@endsection
 @section('main-word')
 الأماكن
 @endsection

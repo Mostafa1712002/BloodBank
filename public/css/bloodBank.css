@@ -1,9 +1,16 @@
-/* Custom animation and smooth of aside  */
-
-.fix-smooth {
-    height: 800px;
+.jconfirm-closeIcon {
+    visibility: hidden;
 }
 
-.btn-info {
-    font-size: 14px;
+.fix-smooth{
+    height: 500px;
+}
+.side-menu__icon {
+    width: 17px !important;
+    height: 32px !important;
+    line-height: 38px !important;
+    font-size: 20px !important;
+}
+.no-after:after{
+    content: none !important;
 }

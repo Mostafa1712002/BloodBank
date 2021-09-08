@@ -1,9 +1,8 @@
 @extends('layouts.master2')
 
 @section('title')
-تسجيل الدخول
-@stop
-
+    استعادة كلمة المرور - بنك الدم
+@endsection
 
 @section('css')
 <!-- Sidemenu-respoansive-tabs css -->
