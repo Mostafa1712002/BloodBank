@@ -156,7 +156,7 @@
 
 @if (auth()->user()->can("show-post"))
 <div class="row">
-    <div class="col-12 text-body text-center " >
+    <div class="col-12 text-body text-center " style=" font-size:50px" >
 
         <a href="{{ route("user.index") }}" class="text-secondary">
             عن المقالات
