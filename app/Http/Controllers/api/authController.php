@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Models\Token;
 use App\Models\Client;
 use App\Traits\ApiTraits;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\bloodBank_resetPassword;
+use App\Http\Resources\ClientResource;
 
 class AuthController extends Controller
 {
@@ -34,42 +35,36 @@ class AuthController extends Controller
             return $this->responseJson(0, $validator->errors()->first(), $validator->errors());
         }
         $client = Client::create($request->all());
-        $client->api_token = Str::random(60);
-        $client->save();
-        return $this->responseJson(1, "تم التسجيل بنجاح", ["api_token" => $client->api_token, "data" => $client]);
+
+        $accessToken = $client->createToken('authToken')->accessToken;
+
+        return $this->responseJson(1, "تم التسجيل بنجاح", [
+            "api_token" => $accessToken,
+            "client" => new ClientResource($client),
+        ]);
     }
 
     // The Method to login
     public function login(Request $request)
     {
-
-        $validator = validator()->make($request->all(), [
-            "phone" => "required|max:15",
-            "password" => "required|min:8",
-        ]);
-        if ($validator->fails()) {
-            return $this->responseJson((string)0, $validator->errors()->first(), $validator->errors());
-        }
-
-        //  Guard front here for  search in eloquent Client
-        $auth = Auth::guard("front")->attempt(['phone' => $request->phone, 'password' => $request->password]);
+        $auth = Auth::guard('client')->attempt(['phone' => $request->phone, 'password' => $request->password]);
 
         if (!$auth) {
-            return $this->responseJson("0", "راجع بياناتك هناك خطأ");
+            return $this->responseJson("0", " راجع بياناتك هناك خطأ");
         }
-
         $client = Client::where("phone", $request->phone)->first();
+        $accessToken = $client->createToken('authToken')->accessToken;
         return $this->responseJson(1, "تم التسجيل بنجاح", [
-            "api_token" => $client->api_token,
+            "api_token" => $accessToken,
             "data" => $client,
 
         ]);
     }
 
-
     // The Method to reset the password
     public function resetPassword(Request $request)
     {
+
         $validator = validator()->make($request->all(), [
             "phone" => "required|exists:clients,phone",
         ]);
@@ -80,10 +75,12 @@ class AuthController extends Controller
                 "fails" => Mail::failures(),
             ]);
         }
+
+        $client = Client::where("phone", $request->phone)->first();
+
         $pin_code = rand(11111, 99999);
-        Client::where("phone", $request->phone)->update(["pin_code" => $pin_code]);
-        $client = Client::where("pin_code", $pin_code)->first();
-        // Mail::to($client->email)->send(new bloodBank_resetPassword($client));
+        $client->update(["pin_code" => $pin_code]);
+        Mail::to($client->email)->send(new bloodBank_resetPassword($client));
         // Nexmo::message()->send([
         //     "to" => "201022348224",
         //     "from" => "+20148976476",
@@ -106,23 +103,22 @@ class AuthController extends Controller
         }
 
         $user = Client::where("pin_code", $request->pin_code)->where("pin_code", "!=", 0)->first();
-        // return print_r($user);
-        if ($user) :
-            // Client::where("pin_code",$request->pin_code)->update(["password" => $request->password]);
+
+        if ($user):
             $user->password = $request->password;
             $user->pin_code = null;
-            if ($user->save()) :
+            if ($user->save()):
                 return $this->responseJson("1", "تم تحديت كلمه المرور ");
 
-            else :
+            else:
                 return $this->responseJson("0", "حدث خطأ حاول مره أخري !!");
             endif;
-        else :
+        else:
             return $this->responseJson("0", "هذا الكود غير صحيح ");
 
         endif;
-    }
 
+    }
 
     // The method  of the mobile to register token for FCM
     public function registerToken(Request $request)
@@ -144,7 +140,6 @@ class AuthController extends Controller
         return $this->responseJson("1", "تم", $token);
     }
 
-
     // The method  of the mobile to remove token for FCM if the client make a sign out from his account in any device
 
     public function removeToken(Request $request)
@@ -159,4 +154,5 @@ class AuthController extends Controller
         Token::where("token", $request->token)->delete();
         return $this->responseJson("0", "تم");
     }
+
 }

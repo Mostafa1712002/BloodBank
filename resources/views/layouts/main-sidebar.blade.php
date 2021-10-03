@@ -27,7 +27,6 @@
         </div>
 
         <ul class="side-menu">
-
             <li class="side-item side-item-category">تطبيق بنك الدم</li>
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/admin/home') }}">
@@ -46,7 +45,8 @@
                 </a>
             </li>
 
-            @if (auth()->user()->can('show-user') || auth()->user()->can('show-role'))
+            @if (auth()->user()->can('show-user') ||
+    auth()->user()->can('show-role'))
                 <li class="side-item side-item-category">مسئولين التطبيق</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
@@ -55,7 +55,7 @@
                             التطبيق</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         @if (auth()->user()->can('show-user'))
-                            <li><a class="slide-item"
+                            <li><a class="slide-item"   
                                     href="{{ url('/' . ($page = 'admin/user')) }}">المستخدمين</a>
                             </li>
                         @endif
@@ -70,42 +70,51 @@
 
 
 
-            @if (auth()->user()->can("show-donation-request") || auth()->user()->can("show-category") ||auth()->user()->can("show-post") ||auth()->user()->can("show-city") ||auth()->user()->can("show-governorate") || auth()->user()->can("show-contact"))
-            <li class="side-item side-item-category">مكونات التطبيق</li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
-                    <i class="fe fe-book-open side-menu__icon" viewBox="0 0 24 24"> </i>
-                    <span class="side-menu__label">مكونات
-                        التطبيق</span><i class="angle fe fe-chevron-down"></i></a>
-                <ul class="slide-menu">
-                    @if (auth()->user()->can('show-donation-request'))
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/donation-request')) }}">طلابات التبرع</a>
-                    </li>
-                    @endif
-                    @if (auth()->user()->can('show-category'))
+            @if (auth()->user()->can('show-donation-request') ||
+    auth()->user()->can('show-category') ||
+    auth()->user()->can('show-post') ||
+    auth()->user()->can('show-city') ||
+    auth()->user()->can('show-governorate') ||
+    auth()->user()->can('show-contact'))
+                <li class="side-item side-item-category">مكونات التطبيق</li>
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
+                        <i class="fe fe-book-open side-menu__icon" viewBox="0 0 24 24"> </i>
+                        <span class="side-menu__label">مكونات
+                            التطبيق</span><i class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        @if (auth()->user()->can('show-donation-request'))
+                            <li><a class="slide-item"
+                                    href="{{ url('/' . ($page = 'admin/donation-request')) }}">طلابات التبرع</a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->can('show-category'))
 
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/category')) }}">الأقسام</a>
-                    </li>
-                    @endif
-                    @if (auth()->user()->can('show-post'))
+                            <li><a class="slide-item"
+                                    href="{{ url('/' . ($page = 'admin/category')) }}">الأقسام</a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->can('show-post'))
 
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/post')) }}">المقالات</a></li>
-                    @endif
-                    @if (auth()->user()->can('show-contact'))
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/contact')) }}">الرسائل
-                            المستلمه</a>
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/post')) }}">المقالات</a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->can('show-contact'))
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/contact')) }}">الرسائل
+                                    المستلمه</a>
                         @endif
                         @if (auth()->user()->can('show-governorate'))
 
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/governorate')) }}">المحافظات</a></li>
-                    @endif
-                    @if (auth()->user()->can('show-city'))
+                            <li><a class="slide-item"
+                                    href="{{ url('/' . ($page = 'admin/governorate')) }}">المحافظات</a></li>
+                        @endif
+                        @if (auth()->user()->can('show-city'))
 
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/city')) }}">المدن</a>
-                    </li>
-                    @endif
-                </ul>
-            </li>
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'admin/city')) }}">المدن</a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
             @endif
 
 
@@ -143,3 +152,4 @@
         </ul>
 </aside>
 <!-- main-sidebar -->
+

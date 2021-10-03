@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\api\AuthController;
-use App\Http\Controllers\api\MainController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 ########### The api get routes         ###########
 
-
 Route::group(["prefix" => "v1", "namespace" => "Api"], function () {
     Route::get('/posts', [MainController::class, "posts"]);
     Route::get('/governorates', [MainController::class, "governorates"]);
@@ -27,15 +25,18 @@ Route::group(["prefix" => "v1", "namespace" => "Api"], function () {
     Route::get('/bloodTypes', [MainController::class, "bloodTypes"]);
     Route::get('/donation-requests', [MainController::class, "donationRequests"]);
 
-
-    // login && register 
+    // login && register
     Route::post('/login', [AuthController::class, "login"]);
     Route::post('/register', [AuthController::class, "register"]);
+    Route::post('/new-password', [AuthController::class, "newPassword"])->name("newPassword");
+    Route::post('/reset-password', [AuthController::class, "resetPassword"]);
 
+    Route::post('/create-contact', [MainController::class, "createContact"]);
+
+    
     // Auth routes
-    Route::middleware("auth:api")->group(function () {
-        Route::post('/new-password', [AuthController::class, "newPassword"])->name("newPassword");
-        Route::post('/reset-password', [AuthController::class, "resetPassword"]);
+    Route::middleware("auth:client-api")->group(function () {
+
         Route::post('/register-token', [AuthController::class, "registerToken"]);
         Route::post('/remove-token', [AuthController::class, "removeToken"]);
         // which is get && auth
@@ -47,7 +48,6 @@ Route::group(["prefix" => "v1", "namespace" => "Api"], function () {
         Route::post('/catagories', [MainController::class, "categories"]);
         Route::post('/create-donation-request', [MainController::class, "createDonationRequest"]);
         Route::post('/post-favorite', [MainController::class, "postFavorite"]);
-        Route::post('/create-contact', [MainController::class, "createContact"]);
         Route::post('/update-profile', [MainController::class, "updateProfile"]);
         Route::post('/notification-settings', [MainController::class, "NotificationSettings"]);
     });

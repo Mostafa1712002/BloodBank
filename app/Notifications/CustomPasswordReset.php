@@ -47,7 +47,7 @@ class CustomPasswordReset extends Notification
         ->subject('لينك استعادة كلمة المرور لبنك الدم')
         ->greeting(" :)اهلا بك عميلنا العزيز")
         ->line('انت قد أستلمت هذا البريد الالكتروني من بنك الدم و ذلك لأستعادة كلمة المرور ') // Here are the lines you can safely override
-        ->action('أستعادة كلمة المرور ', route('client.password.reset', $this->token))
+        ->action('أستعادة كلمة المرور ', route('password.reset', $this->token))
         ->line('إذا لم تطلب إعادة تعيين كلمة المرور ، فلا داعي لاتخاذ أي إجراء آخر');
     }
 

@@ -31,9 +31,9 @@ class DonationRequest extends Model
         return $this->belongsTo( Client::class);
     }
 
-    public function notification()
+    public function notifications()
     {
-        return $this->belongsTo( Notification::class);
+        return $this->belongsTo(Notification::class);
     }
 
 }

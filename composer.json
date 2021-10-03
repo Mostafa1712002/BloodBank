@@ -11,6 +11,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.40",
+        "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
         "spatie/laravel-permission": "^4.2"

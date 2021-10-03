@@ -22,7 +22,6 @@ class CreateDonationRequestsTable extends Migration {
 			$table->string('hospital_address');
 			$table->decimal('latitude', 10,8);
 			$table->decimal('longitude', 10,8);
-            $table -> integer("governorate_id")->unsigned();
 		});
 	}
 

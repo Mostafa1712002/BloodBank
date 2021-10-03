@@ -16,12 +16,21 @@ trait ApiTraits
     {
 
         return response()->json([
-            "status" => (integer) $status,
+            "status" => (string) $status,
             "massage" => $massage,
             "data" => [
                 $object,
             ],
         ]);
+
+    }
+    public function responseJsonFalse()
+    {
+
+        return response()->json([
+            "status" => (string)0,
+            "massage" => "لا توجد بيانات ",
+                    ]);
     }
 
 

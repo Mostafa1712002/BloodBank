@@ -1,23 +1,20 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\cityController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\postController;
-use App\Http\Controllers\roleController;
-use App\Http\Controllers\userController;
-use App\Http\Controllers\adminController;
-use App\Http\Controllers\errorController;
-use App\Http\Controllers\clientController;
-use App\Http\Controllers\contactController;
-use App\Http\Controllers\settingController;
-use App\Http\Controllers\categoryController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\governorateController;
-use App\Http\Controllers\donationRequestController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\GovernorateController;
+use App\Http\Controllers\DonationRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +34,10 @@ Auth::routes();
 Route::group(["middleware" => ["auth", "auto-check-permission"], "prefix" => "admin"], function () {
 
     //Admin Login Check
-    Route::get('/login/check', [LoginController::class, "showLoginForm"])->name('admin.login-check');
+    // Route::get('/login/check', [LoginController::class, "showLoginForm"])->name('admin.login-check');
 
     // the home controller
-    Route::get('/home', [HomeController::class, "index"])->name('home.index');
+    Route::get('/home', [Controller::class, "index"])->name('home.index');
     // The resource for governorate
     Route::resource('governorate', governorateController::class);
     // The resource for city

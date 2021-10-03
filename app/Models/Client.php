@@ -8,21 +8,20 @@ use App\Models\BloodType;
 use App\Models\Governorate;
 use App\Models\Notification;
 use App\Models\DonationRequest;
-
-use Illuminate\Database\Eloquent\Model;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CustomPasswordReset;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
-class Client extends Authenticatable
+class Client extends User
 {
-    use Notifiable;
+    use Notifiable,HasApiTokens;
 
     protected $table = 'clients';
     public $timestamps = true;
-    protected $fillable = array('phone', 'email', 'password', 'name', 'd_o_b', 'blood_type_id', 'last_donation_date', 'city_id', 'pin_code', "api_token", "is_active");
-    protected $hidden = ["api_token", "password"];
+    protected $fillable = array('phone', 'email', 'password', 'name', 'd_o_b', 'blood_type_id', 'last_donation_date', 'city_id', 'pin_code', "is_active");
+    protected $hidden = [ "password"];
     public function posts()
     {
         return $this->belongsToMany(Post::class);

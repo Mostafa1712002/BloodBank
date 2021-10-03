@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Requests\registerClient;
-use App\Models\Post;
+use App\Models\City;
 use App\Models\Client;
 use App\Traits\ApiTraits;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class AuthController extends Controller
 {
-    use  ValidatesRequests;
+    use ValidatesRequests;
     use ApiTraits;
 
     // ############# Login and Register Methods ################
@@ -29,14 +27,13 @@ class AuthController extends Controller
     {
         $request->flash();
         $this->validate($request, $this->rules(), $this->messages());
-        $request->merge(["api_token" => Str::random(60)]);
         $client = Client::create($request->all());
         if ($client) {
             flash("يمكنك الان تسجيل الدخول")->success();
             return view("front.signin-account");
         } else {
-            flash("حدث خطأ غير منوقع حاول مره آخري بعد بضع دقائق")->error();
-            return redirect()->back();
+            flash("حدث خطأ غير متوقع حاول مره آخري بعد بضع دقائق")->error();
+            return back();
         }
     }
 
@@ -46,7 +43,6 @@ class AuthController extends Controller
         return view("front.signin-account");
     }
 
-
     //  check for sign in
     public function signInCheck(Request $request)
     {
@@ -55,20 +51,37 @@ class AuthController extends Controller
         } else {
             $request->flash();
             flash("هناك خطأ في بياناتك راجع بياناتك ثم حاول مره آخري ")->error();
-            return redirect()->back();
+            return back();
         }
     }
 
     //  logout from the website
     public function logOut()
     {
-        Auth::guard('front')->logout();
+        auth("front")->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
         return redirect()->route("front.index");
+    }
+
+    //  Governorate And City Auth
+
+    public function governorate(Request $request)
+    {
+
+        return [
+
+            "status" => 1,
+            "data" => City::where("governorate_id",$request->governorate_id)->get(),
+        ];
+
     }
     //  Validation Messages and rules
     public function messages()
     {
-        return  [
+        return [
             "name.required" => "الاسم مطلوب",
             "name.min" => "الحد الأدني من حروف الاسم هو 10",
             "name.max" => "الحد الأقصي من الحروف الاسم هو 255",
@@ -109,7 +122,5 @@ class AuthController extends Controller
             "password" => "required|confirmed|min:8",
         ];
     }
-
-
 
 }

@@ -76,7 +76,7 @@
             var element = $(this).children()
             $.ajax({
                 type: "post"
-                , url: '{{ url(route("client-toggle-favourite")) }}'
+                , url: '{{ url(route("client-toggle-favorite")) }}'
                 , data: {
                     _token: "{{ csrf_token() }}"
                     , post_id: post_id

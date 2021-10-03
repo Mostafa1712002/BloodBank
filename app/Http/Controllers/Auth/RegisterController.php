@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use Illuminate\Routing\Controller;
 
+use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,24 +49,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
-        $rules = [
-            'name' => ['required', 'max:255',"min:10"],
-            'email' => ['required',  'email', 'unique:users,email'],
-            'password' => ['required',  'min:8', 'confirmed'],
-        ];
-        $messages = [
-            "name.required" => "الاسم مطلوب",
-            "name.max" => "الحد الأقصي من الحروف الاسم هو 255",
-            "name.min" => "الحد الأدني من حروف الاسم هو 10",
-            "email.required" => "البريد الالكتروني مطلوب",
-            "email.unique" => "هذا البريد الالكتروني موجود من قبل",
-            "email.email" => "هذا البريد الالكتروني غير صالح",
-            "password.required" => "كلمة المرور مطلوبه",
-            "password.min" => "الحد الادني من الحروف هو 8",
-            "password.confirmed" => "كلمتي المرور غير مطباقين",
-        ];
-        return Validator::make($data,$rules,$messages);
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
     }
 
     /**
